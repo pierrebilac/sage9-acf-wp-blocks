@@ -3,13 +3,13 @@
 namespace App;
 
 // Check whether WordPress and ACF are available; bail if not.
-if (! function_exists('acf_register_block_type')) {
+if (!function_exists('acf_register_block_type')) {
     return;
 }
-if (! function_exists('add_filter')) {
+if (!function_exists('add_filter')) {
     return;
 }
-if (! function_exists('add_action')) {
+if (!function_exists('add_action')) {
     return;
 }
 
@@ -43,26 +43,26 @@ add_action('acf/init', function () {
         foreach ($template_directory as $template) {
             if (!$template->isDot() && !$template->isDir()) {
 
-            // Strip the file extension to get the slug
+                // Strip the file extension to get the slug
                 $slug = removeBladeExtension($template->getFilename());
 
                 // Get header info from the found template file(s)
-                $file_path = locate_template($dir."/${slug}.blade.php");
+                $file_path = locate_template($dir . "/${slug}.blade.php");
                 $file_headers = get_file_data($file_path, [
-                      'title' => 'Title',
-                      'description' => 'Description',
-                      'category' => 'Category',
-                      'icon' => 'Icon',
-                      'keywords' => 'Keywords',
-                      'mode' => 'Mode',
-                      'align' => 'Align',
-                      'post_types' => 'PostTypes',
-                      'supports_align' => 'SupportsAlign',
-                      'supports_mode' => 'SupportsMode',
-                      'supports_multiple' => 'SupportsMultiple',
-                      'enqueue_style'     => 'EnqueueStyle',
-                      'enqueue_script'    => 'EnqueueScript',
-                      'enqueue_assets'    => 'EnqueueAssets',
+                    'title' => 'Title',
+                    'description' => 'Description',
+                    'category' => 'Category',
+                    'icon' => 'Icon',
+                    'keywords' => 'Keywords',
+                    'mode' => 'Mode',
+                    'align' => 'Align',
+                    'post_types' => 'PostTypes',
+                    'supports_align' => 'SupportsAlign',
+                    'supports_mode' => 'SupportsMode',
+                    'supports_multiple' => 'SupportsMultiple',
+                    'enqueue_style' => 'EnqueueStyle',
+                    'enqueue_script' => 'EnqueueScript',
+                    'enqueue_assets' => 'EnqueueAssets',
                 ]);
 
                 if (empty($file_headers['title'])) {
@@ -75,18 +75,18 @@ add_action('acf/init', function () {
 
                 // Set up block data for registration
                 $data = [
-                      'name' => $slug,
-                      'title' => $file_headers['title'],
-                      'description' => $file_headers['description'],
-                      'category' => $file_headers['category'],
-                      'icon' => $file_headers['icon'],
-                      'keywords' => explode(' ', $file_headers['keywords']),
-                      'mode' => $file_headers['mode'],
-                      'render_callback'  => __NAMESPACE__.'\\sage_blocks_callback',
-                      'enqueue_style'   => $file_headers['enqueue_style'],
-                      'enqueue_script'  => $file_headers['enqueue_script'],
-                      'enqueue_assets'  => $file_headers['enqueue_assets'],
-                    ];
+                    'name' => $slug,
+                    'title' => $file_headers['title'],
+                    'description' => $file_headers['description'],
+                    'category' => $file_headers['category'],
+                    'icon' => $file_headers['icon'],
+                    'keywords' => explode(' ', $file_headers['keywords']),
+                    'mode' => $file_headers['mode'],
+                    'render_callback' => __NAMESPACE__ . '\\sage_blocks_callback',
+                    'enqueue_style' => $file_headers['enqueue_style'],
+                    'enqueue_script' => $file_headers['enqueue_script'],
+                    'enqueue_assets' => $file_headers['enqueue_assets'],
+                ];
 
                 // If the PostTypes header is set in the template, restrict this block to those types
                 if (!empty($file_headers['post_types'])) {
@@ -121,14 +121,14 @@ add_action('acf/init', function () {
 function sage_blocks_callback($block, $content = '', $is_preview = false, $post_id = 0)
 {
 
-  // Set up the slug to be useful
-    $slug  = str_replace('acf/', '', $block['name']);
+    // Set up the slug to be useful
+    $slug = str_replace('acf/', '', $block['name']);
     $block = array_merge(['className' => ''], $block);
 
     // Set up the block data
     $block['post_id'] = $post_id;
     $block['slug'] = $slug;
-    $block['classes'] = implode(' ', [$block['slug'], $block['className'], 'align'.$block['align']]);
+    $block['classes'] = implode(' ', [$block['slug'], $block['className'], 'align' . $block['align']]);
 
     // Use Sage's template() function to echo the block and populate it with data
     echo \App\template("blocks/${slug}", ['block' => $block]);
@@ -140,7 +140,7 @@ function sage_blocks_callback($block, $content = '', $is_preview = false, $post_
 function removeBladeExtension($filename)
 {
 
-  // Remove the unwanted extensions
+    // Remove the unwanted extensions
     $return = substr($filename, 0, strrpos($filename, '.blade.php'));
 
     // Always return
