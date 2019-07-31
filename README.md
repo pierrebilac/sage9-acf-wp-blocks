@@ -5,6 +5,8 @@ This package is based heavily on [this article](https://medium.com/nicooprat/acf
 This is a fork of [MWDelaney/sage-acf-wp-blocks](https://github.com/MWDelaney/sage-acf-wp-blocks) which 
 seemed no longer maintained when I needed to include it in my project.
 
+**PR welcomed!**
+
 ## Installation
 Run the following in your Sage 9-based theme directory:
 ```sh
