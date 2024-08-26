@@ -63,6 +63,7 @@ add_action('acf/init', function () {
                     'enqueue_style' => 'EnqueueStyle',
                     'enqueue_script' => 'EnqueueScript',
                     'enqueue_assets' => 'EnqueueAssets',
+                    'supports_jsx' => 'SupportsInnerBlocks',
                 ]);
 
                 if (empty($file_headers['title'])) {
@@ -86,7 +87,6 @@ add_action('acf/init', function () {
                     'enqueue_style' => $file_headers['enqueue_style'],
                     'enqueue_script' => $file_headers['enqueue_script'],
                     'enqueue_assets' => $file_headers['enqueue_assets'],
-                    'supports_jsx' => 'SupportsInnerBlocks',
                 ];
 
                 // If the PostTypes header is set in the template, restrict this block to those types
