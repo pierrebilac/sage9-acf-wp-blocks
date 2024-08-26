@@ -1,5 +1,5 @@
 {
-  "name": "orditeck/sage9-acf-wp-blocks",
+  "name": "pierrebilac/sage9-acf-wp-blocks",
   "description": "Create Gutenberg blocks from Sage blade templates and ACF fields.",
   "keywords": [
     "wordpress",
