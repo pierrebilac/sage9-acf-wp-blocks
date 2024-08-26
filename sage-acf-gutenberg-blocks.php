@@ -86,6 +86,7 @@ add_action('acf/init', function () {
                     'enqueue_style' => $file_headers['enqueue_style'],
                     'enqueue_script' => $file_headers['enqueue_script'],
                     'enqueue_assets' => $file_headers['enqueue_assets'],
+                    'supports_jsx' => 'SupportsInnerBlocks',
                 ];
 
                 // If the PostTypes header is set in the template, restrict this block to those types
@@ -106,6 +107,11 @@ add_action('acf/init', function () {
                 // If the SupportsMultiple header is set in the template, restrict this block multiple feature
                 if (!empty($file_headers['supports_multiple'])) {
                     $data['supports']['multiple'] = $file_headers['supports_multiple'] === 'true' ? true : false;
+                }
+
+                // If the SupportsInnerBlocks header is set in the template, restrict this block mode feature
+                if (!empty($file_headers['supports_jsx'])) {
+                    $data['supports']['jsx'] = $file_headers['supports_jsx'] === 'true' ? true : false;
                 }
 
                 // Register the block with ACF
